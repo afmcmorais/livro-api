@@ -1,13 +1,14 @@
-const { defineConfig } = require("cypress");
+// require('dotenv').config();
 
+const { defineConfig } = require('cypress');
 const { configurePlugin } = require('cypress-mongodb');
 
 module.exports = defineConfig({
   env: {
     mongodb: {
-      uri: 'mongodb+srv://afmcmorais:230117@livroapi.1jq6a.mongodb.net/LivroApi?retryWrites=true&w=majority&appName=LivroApi',
-      database: 'LivroApi',
-      collection: 'livros'
+      uri: process.env.DATABASE_URL || require('./cypress.env.json').DATABASE_URL,
+      database: process.env.MONGODB_DATABASE || require('./cypress.env.json').MONGODB_DATABASE,
+      collection: process.env.MONGODB_COLLECTION || require('./cypress.env.json').MONGODB_COLLECTION
     }
   },
   e2e: {
